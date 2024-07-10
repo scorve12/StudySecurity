@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client';
-import Login from './page/login';
+import Login from './page/login/index';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 import { Cookies } from 'react-cookie';

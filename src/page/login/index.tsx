@@ -6,7 +6,7 @@ import AuthService from "../../components/auth";
 const Login: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['jwt']);
+  const [cookies, setCookie] = useCookies(['jwt', 'refreshToken']);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
@@ -18,7 +18,9 @@ const Login: React.FC = () => {
 
       AuthService.login(username, password).then(
         (response) => {
-          setCookie('jwt', response.accessToken, { path: '/' });
+          setCookie('jwt', response.accessToken, { path: '/', maxAge: 3600 });
+          setCookie('refreshToken', response.refreshToken, { path: '/', maxAge: 86400  });
+          
           navigate("/profile");
           window.location.reload();
         },

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const login = async (username: string, password: string) => {
   try {
-    const response = await axios.post('https://api.springjh.kr/login', {
+    const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, {
       username,
       password,
     });
