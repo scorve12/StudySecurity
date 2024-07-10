@@ -13,7 +13,7 @@ phases:
     commands:
       - echo Compiling the Node.js code
       - npm run build
-   post_build:
+  post_build:
     commands:
       - echo Build completed on `date`
       - aws s3 sync ./build/web s3://www.springjh.kr
