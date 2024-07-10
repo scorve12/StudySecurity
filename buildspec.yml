@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing dependency...
+      - npm install -g next
+      - yarn
+  pre_build:
+    commands:
+      - echo Pre build started on `date`
+  build:
+    commands:
+      - echo Compiling the Node.js code
+      - yarn build
+   post_build:
+    commands:
+      - echo Build completed on `date`
+      - aws s3 sync ./build/web s3://sodam.mindheal.today
+      - aws cloudfront create-invalidation --distribution-id E12G4SKLPDK452 --paths  "/*"
+artifacts:
+  files:
+    - '**/*'
