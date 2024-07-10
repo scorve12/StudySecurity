@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const login = async (email: string, password: string) => {
+const login = async (username: string, password: string) => {
   try {
-    const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, {
-      email,
+    const response = await axios.post('https://api.springjh.kr/login', {
+      username,
       password,
     });
     if (response.data.accessToken) {
