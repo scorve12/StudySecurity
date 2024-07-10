@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       - echo Installing dependency...
-      - npm install -g next
+      - npm install -g react
       - yarn
   pre_build:
     commands:
@@ -12,12 +12,12 @@ phases:
   build:
     commands:
       - echo Compiling the Node.js code
-      - yarn build
+      - npm run build
    post_build:
     commands:
       - echo Build completed on `date`
-      - aws s3 sync ./build/web s3://sodam.mindheal.today
-      - aws cloudfront create-invalidation --distribution-id E12G4SKLPDK452 --paths  "/*"
+      - aws s3 sync ./build/web s3://www.springjh.kr
+      - aws cloudfront create-invalidation --distribution-id EC1ZY46GZAUBK --paths  "/*"
 artifacts:
   files:
     - '**/*'
