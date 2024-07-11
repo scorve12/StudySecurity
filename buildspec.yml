@@ -16,7 +16,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - aws s3 sync ./build s3://test.spring.kr 
+      - aws s3 sync ./build s3://test.springjh.kr 
       - aws cloudfront create-invalidation --distribution-id EC1ZY46GZAUBK --paths  "/*" #캐시를 갱신해주는 명령어
 artifacts:
   files:
