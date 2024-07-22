@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Home from '../page/main/App';
 import Login from '../page/login/index';
 import Profile from '../page/login/profile';
+import Adminprofile from '../page/login/adminprorfile';
 
 const AppRouter: React.FC = () => {
     return (
@@ -12,6 +13,7 @@ const AppRouter: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />  
             <Route path="/profile" element={<Profile />} />
+            <Route path="/adminprofile" element={<Adminprofile />} />
         </Router>
     );
 };

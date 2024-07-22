@@ -2,6 +2,7 @@ import React, { useState, useRef, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import AuthService from "../../components/jwt";
+import {jwtDecode} from 'jwt-decode';
 
 const Login: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -9,6 +10,8 @@ const Login: React.FC = () => {
   const [cookies, setCookie] = useCookies(['jwt', 'refreshToken']);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault();
@@ -19,10 +22,16 @@ const Login: React.FC = () => {
           setCookie('jwt', response.accessToken, { path: '/', maxAge: 3600 });
           setCookie('refreshToken', response.refreshToken, { path: '/', maxAge: 86400  });
           
-          navigate("/profile");
+          const decoded = jwtDecode(response.accessToken);
+          if (decoded.role === 'admin') {
+            navigate("/adminprofile")
+          } else {
+            navigate("/profile")
+          }
+          
           window.location.reload();
         },
-        (error) => {
+        (error:Error) => {
           console.error(error);
         }
       );
