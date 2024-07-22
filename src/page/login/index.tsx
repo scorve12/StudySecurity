@@ -1,7 +1,7 @@
 import React, { useState, useRef, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import AuthService from "../../components/auth";
+import AuthService from "../../components/jwt";
 
 const Login: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -14,8 +14,6 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     if (form.current) {
-      // Form validation logic can be added here
-
       AuthService.login(username, password).then(
         (response) => {
           setCookie('jwt', response.accessToken, { path: '/', maxAge: 3600 });
@@ -34,7 +32,7 @@ const Login: React.FC = () => {
   return (
     
     <form onSubmit={handleLogin} ref={form}>
-      <h1>두번째 CI/CD</h1>
+      <h1>JWT CI/CD</h1>
       <div>
         <label htmlFor="username">Username</label>
         <input
